@@ -1,0 +1,174 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{titlepic}
+\usepackage{textcomp}
+\usepackage{float}
+\usepackage{caption}
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\contentsname}{Índice}
+
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\data}{\today}
+
+\setlist[description]{leftmargin=\parindent,labelindent=\parindent,rightmargin=\parindent}
+
+\captionsetup[table]{skip=10pt}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{titlepage}
+\begin{center}
+  \vspace*{1cm}
+
+  {\Huge \textbf{Programação Avançada}} \\
+  \vspace{0.8cm}
+  \textbf{Meta 2}
+  \vspace{0.8cm}
+
+  \vspace{9.0cm}
+
+  \textbf{André Pedro \\ a21240337@alunos.isec.pt}
+  \\[0.6cm]
+  \textbf{Romeu Gomes \\ a21240332@alunos.isec.pt}
+  \\[1cm]
+  \textbf{\data{}}
+
+  \vfill
+  \textit{ISEC - Instituto Superior de Engenharia de Coimbra\\
+  Departamento de Engenharia Informática e Sistemas\\}
+
+\end{center}
+\end{titlepage}
+
+\pagenumbering{arabic}
+
+\tableofcontents
+\newpage\noindent
+
+\section{Diagrama da Máquina de Estados}
+\begin{figure}[!ht]
+  \centering
+    \includegraphics[width=1\textwidth]{Main.jpg}
+\end{figure}
+
+\newpage\noindent
+
+\section{Descrição das Classes}
+\subsection{Classes no Package \textit{logicaJogo}}
+
+\begin{enumerate}
+\item Jogo - Classe onde existem métodos para alterar o Estado actual do jogo. É usado ao longo do jogo para alterar os estados e fazer o jogador progredir.
+\item Utils - Classe estática com métodos que possam ser úteis, como, por exemplo, o lançamento do dado.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{logicaJogo.Dados}}
+
+\begin{enumerate}
+
+\item DadosJogo - Classe que irá conter toda a informação do jogo, como por exemplo, o número de pontos de riqueza, metal, vitória, etc. Também inclui uma grande quantidade de funcões que servem para ajudar outras classes a obter informações relativas ao estado do jogo.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{logicaJogo.Eventos}}
+
+\begin{enumerate}
+\item Evento - Classe que serve de base para todas as outras classes que representam eventos.
+\item Asteroid - Classe que corresponde ao evento \textit{Asteroide} e tem o método principal \textit{execute}. Adiciona o recurso indicado na carta.
+\item DerelictShip - Classe que corresponde ao evento \textit{Nave Abandonada} e tem o método principal \textit{execute}. Adiciona o recurso indicado na carta.
+\item LargeInvasionForce - Classe que corresponde ao evento \textit{Invasão Grande} e tem o método principal \textit{execute}. É uma invasão superior à pequena.
+\item PeaceAndQuiet - Classe que corresponde ao evento \textit{Sem Evento} e tem o método principal \textit{execute}. Não acontece nada.
+\item Revolt - Classe que corresponde ao evento \textit{Revolta} e tem o método principal \textit{execute}. Pode tornar um sistema não conquistado num sistema não alinhado, e, se as condições forem ideais, o jogador também pode perder o jogo.
+\item SmallInvasionForce - Classe que corresponde ao evento \textit{Invasão Pequena} e tem o método principal \textit{execute}.
+\item SRevolt - Classe que corresponde ao evento \textit{Revolta Pequena} e tem o método principal \textit{execute}. Tem um menor efeito do que a revolta normal.
+\item Strike - Classe que corresponde ao evento \textit{Greve} e tem o método principal \textit{execute}. O sistema em greve deixa de oferecer recursos.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{logicaJogo.Sistemas}}
+
+\begin{enumerate}
+\item MSESystem - Classe base para ambas as classes NearSystem e DistantSystem. Contém toda a informação de um sistema.
+\item NearSystem - Classe que representa os Sistemas que não são distantes.
+\item DistantSystem - Classe que representa os Sistemas Distantes.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{logicaJogo.States}}
+
+\begin{enumerate}
+\item IStates - Interface onde estão definidos todos os estados.
+\item StateAdapter - Classe onde se devolve cada estado e onde está a variável que contém os dados do jogo, para ser usada em diferentes situações.
+\item PreparacaoJogo - Classe que representa o Estado do início do jogo, onde são definidas várias variáveis.
+\item ExplorarAtacarConquistarPassar - Classe que representa o Estado em que se pode explorar, atacar ou conquistar Sistemas. É possível também passar esta fase sem fazer qualquer acção.
+\item Trocar - Classe que representa o Estado em que o jogador tem a possibilidade de trocar vários recursos entre si, se tiver a tecnologia correcta activa.
+\item MilitarTecnologia - Classe que representa o Estado em que o jogador tem a possibilidade, se tiver os recursos, de aumentar o seu nível militar ou comprar uma tecnologia.
+\item FimJogo - Classe que representa o Estado do fim do jogo. O utilizador tem a possibilidade de sair do jogo, ou recomeçar um novo.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{logicaJogo.Tecnologias}}
+
+\begin{enumerate}
+\item Tecnologia - Classe que serve de classe base para todas as classes das tecnologias existentes.
+\item ForwardStarbases - Classe que representa a tecnologia que permite explorar e conquistar Sistemas Distantes.
+\item HyperTelevision - Classe que representa a tecnologia que aumenta a resistência durante um evento de revolta.
+\item InterspecieCommerce - Classe que representa a tecnologia que permite fazer trocas.
+\item InterstellarBanking - Classe que representa a tecnologia que permite aumentar a quantidade de recursos que é possível ter.
+\item InterstellarDiplomacy - Classe que representa a tecnologia que permite explorar/atacar/conquistar um Sistema com sucesso sem qualquer tipo de requerimentos.
+\item PlanetaryDefense - Classe que representa a tecnologia que permite aumentar a resistência durante um evento de Invasão.
+\item RobotWorkers - Classe que representa uma tecnologia que permite obter metade dos recursos durante um evento de Greve.
+\item CapitalShips - Classe que representa a tecnologia que permite o aumento da força militar de 3 para 5.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{ui.texto}}
+
+\begin{enumerate}
+\item IUTexto - Classe que contém todos os métodos de interacção com o utilizador. É a classe onde é definido o estado para que o utilizador vai, de acordo com a situação actual do jogador, e também dependendo das suas escolhas.
+\end{enumerate}
+
+\newpage\noindent
+
+\subsection{Classes no Package \textit{ui.grafico.Controllers}}
+\begin{enumerate}
+\item MainController - Classe que representa o controlador da janela principal.
+\item InitController - Classe que representa o controlador da janela inicial.
+\item InfoTecController - Classe que representa o controlador da janela da explicação das tecnologias.
+\item FinalController - Classe que representa o controlador da janela final do jogo.
+\end{enumerate}
+\newpage\noindent
+    
+\subsection{Classes no Package \textit{ui.grafico.Models}}
+\begin{enumerate}
+\item FinalModel - Classe que representa o modelo da janela final.
+\item MainModel - Classe que representa o modelo da janela principal.
+\item InitModel - Classe que representa o modelo da janela inicial.
+\end{enumerate}
+\newpage\noindent
+    
+\subsection{Classes no Package \textit{ui.grafico.Views}}
+\begin{enumerate}
+\item FinalView - Classe que representa a vista da janela final.
+\item InfoTecView - Classe que representa a vista da janela da explicação das tecnologias.
+\item InitView - Classe que representa a vista da janela inicial.
+\item MainView - Classe que representa a vista da janela principal.
+\end{enumerate}
+
+\newpage\noindent
+
+\section{Características não Implementadas}
+\-\hspace{1cm}A única característica não implementada é a finalização do jogo quando o jogador está no segundo ano e acontece o evento \textit{Invasão}.
+
+\end{document}
